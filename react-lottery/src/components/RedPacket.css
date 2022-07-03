@@ -1,0 +1,97 @@
+:root {
+  --ani-time: 1s;
+}
+
+.redpacket {
+  margin: 10px;
+  width: 13vw;
+  height: 19vw;
+  background: rgb(214, 207, 207);
+  font-family: serif;
+  user-select: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  border-radius: 8px;
+  box-shadow: 0px 2px 1px -1px rgba(23, 22, 22, 0.2),
+    2px 1px 1px 0px rgba(0, 0, 0, 0.14);
+}
+.prize {
+  width: 100%;
+  font-size: 2vw;
+  font-weight: bold;
+  text-align: center;
+  color: #d8493b;
+}
+
+.redpacket-upper {
+  position: absolute;
+  top: 1px;
+  width: 100%;
+  height: 70%;
+  background: #e62601;
+  box-shadow: 0px 1px 2px #d8493b;
+  border-radius: 8px 8px 40% 40%;
+  max-height: 70%;
+}
+.redpacket-lower {
+  position: absolute;
+  bottom: 1px;
+  width: 100%;
+  height: 55%;
+  background: #c60000;
+  border-radius: 8px;
+  max-height: 55%;
+}
+
+.redpacket-button {
+  width: 3vw;
+  height: 3vw;
+  position: absolute;
+  background-color: #fdcc03;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  left: 50%;
+  bottom: 0;
+  font-size: 2vw;
+  transform: translate(-50%, 50%);
+}
+.redpacket.shake {
+  animation: shake var(--ani-time) cubic-bezier(0.36, 0.07, 0.19, 0.97) forwards;
+}
+
+.redpacket-button.fade {
+  transition: opacity var(--ani-time);
+  opacity: 0;
+}
+
+.redpacket-upper.open,
+.redpacket-lower.open {
+  max-height: 0;
+  transition: max-height 0.55s ease var(--ani-time);
+}
+
+@keyframes shake {
+  10%,
+  90% {
+    transform: translate3d(-1px, 0, 0) rotate(3deg);
+  }
+  20%,
+  80% {
+    transform: translate3d(2px, 0, 0) rotate(-2deg);
+  }
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-2px, 0, 0) rotate(2deg);
+  }
+  40%,
+  60% {
+    transform: translate3d(2px, 0, 0) rotate(-1deg);
+  }
+}
