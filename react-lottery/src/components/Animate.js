@@ -1,13 +1,16 @@
-import cx from "classnames";
-import "./Animate.css";
 import "animate.css";
 
+export const ANI_TIME = 0.3;
 
-const Animate = ({play, children}) => (
-    <div className={cx("Animate", {play})}>
-        {children}
-    </div>
-)
+const animation = {
+  animation: `${ANI_TIME * 2}s backInDown ease backwards`,
+  animationDelay: 0,
+};
 
-export default Animate;
-
+export const Animate = ({ delay, children, active }) => (
+  <div
+    style={active ? { ...animation, animationDelay: `${delay}s` } : undefined}
+  >
+    {children}
+  </div>
+);

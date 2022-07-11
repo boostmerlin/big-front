@@ -1,23 +1,36 @@
-import './RedPacket.css';
-import React from 'react';
-
+import "./RedPacket.css";
+import React, { useEffect, useState } from "react";
+import cx from "classnames";
+import { Prize } from "common/model";
 interface IProps {
-  name: string;
-  open: boolean;
+  active: boolean;
+  round: number;
+  onOpen: (prize: Prize) => void;
+  prize: Prize;
 }
 
 export default function RedPacket(props: IProps): React.ReactElement {
   const handleOpen = () => {
-    console.log('open');
+    setOpen(true);
+    props.onOpen(props.prize);
   };
+  const [open, setOpen] = useState(true);
+
+  useEffect(() => {
+    setOpen(false);
+  }, [props.round]);
+
   return (
     <div className="redpacket">
       <div className="prize">
-        <span>{props.name}</span>
+        <span>{props.prize.name}</span>
       </div>
-      <div className="redpacket-lower"></div>
-      <div className="redpacket-upper">
-        <div className="redpacket-button" onClick={handleOpen}>
+      <div className={cx("redpacket-lower", { open })} />
+      <div className={cx("redpacket-upper", { open })}>
+        <div
+          className={cx("redpacket-button", { fade: open })}
+          onClick={props.active ? handleOpen : undefined}
+        >
           開
         </div>
       </div>

@@ -1,25 +1,17 @@
-import { FiChevronLeft } from 'react-icons/fi';
-import { useNavigate } from 'react-router-dom';
-import './PrizeTake.css';
-import RedPacket from '../components/RedPacket';
-import { shuffle, flatten, take, chunk } from 'lodash';
-import { loadPrizes, Prize, takePrize } from '../model';
-import { useState } from 'react';
-import Row from '../components/Row';
-import Animate from '../components/Animate';
-
-const numberOfCandidates = 6;
-const numberOfCandidatesInAChunk = numberOfCandidates / 2;
-
-const generateCandidates = (prizes: Prize[]): Prize[][] =>
-  chunk(take(shuffle(flatten(prizes.map(v=>{
-    return new Array(v.count).fill({name: v.name, count: 1})
-  }))), numberOfCandidates), numberOfCandidatesInAChunk);
+import { FiChevronLeft } from "react-icons/fi";
+import { useNavigate, Navigate } from "react-router-dom";
+import "./PrizeTake.css";
+import RedPacket from "../components/RedPacket";
+import { loadPrizes, Prize, takePrize, hasAnyPrizes } from "common/model";
+import { useEffect, useRef, useState } from "react";
+import Row from "../components/Row";
+import { ANI_TIME, Animate } from "../components/Animate";
+import { generateCandidates } from "common/model/util";
 
 function Back() {
   const navi = useNavigate();
   const handleBack = async () => {
-    navi('/configure');
+    navi("/configure");
   };
   return (
     <div className="back" onClick={handleBack}>
@@ -29,17 +21,52 @@ function Back() {
 }
 
 export default function PrizeTake() {
-  const [prizes, setPrizes] = useState(loadPrizes)
-  const candidates = generateCandidates(prizes)
+  const [prizes, setPrizes] = useState(loadPrizes);
+  const [selected, setSelected] = useState<Prize | null>(null);
+  const [round, setRound] = useState(0);
+
+  const candidatesRef = useRef<Prize[][]>(generateCandidates(prizes));
+
+  const onOpen = (prize: Prize) => {
+    setSelected(prize);
+  };
+
+  useEffect(() => {
+    candidatesRef.current = generateCandidates(prizes);
+  }, [prizes, round]);
+
+  const onTakePrize = () => {
+    if (!selected) return;
+    console.log(`You got ${selected.name}`);
+    setPrizes(takePrize(selected));
+    setSelected(null);
+    setRound(round + 1);
+  };
+
+  const active = selected === null;
+
+  if (!hasAnyPrizes()) {
+    return <Navigate to="/configure" />;
+  }
+
   return (
-    <div> 
+    <div>
       <Back />
-      <div className="container">
-        {candidates.map((c, i)=> (
+      <div className="container" onClick={onTakePrize}>
+        {candidatesRef.current?.map((c, i) => (
           <Row key={i}>
-            {c.map((r, j)=>(
-              <Animate play={true}>
-                <RedPacket key={j} name={r.name} open={false}/>
+            {c.map((r, j) => (
+              <Animate
+                key={j}
+                active={active}
+                delay={(i * 3 + j) * ANI_TIME * 0.8}
+              >
+                <RedPacket
+                  active={active}
+                  round={round}
+                  prize={r}
+                  onOpen={onOpen}
+                />
               </Animate>
             ))}
           </Row>
@@ -48,3 +75,4 @@ export default function PrizeTake() {
     </div>
   );
 }
+
