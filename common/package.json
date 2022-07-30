@@ -6,7 +6,6 @@
   "scripts": {
     "lint": "eslint . --ext js",
     "format": "prettier --write ."
-    
   },
   "author": "ml",
   "license": "ISC",

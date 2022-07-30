@@ -1,0 +1,23 @@
+{
+  "name": "vue-lottery",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "bootstrap-icons-vue": "^1.8.1",
+    "common": "file:../common",
+    "vue": "^3.2.37",
+    "vue-router": "^4.1.2",
+    "animate.css": "^4.1.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^2.3.3",
+    "typescript": "^4.7.4",
+    "vite": "^2.9.14",
+    "vue-tsc": "^0.38.5"
+  }
+}

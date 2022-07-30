@@ -1,5 +1,5 @@
 import React from "react";
-import "./Row.css";
+import "common/css/Row.css";
 
 export default function Row({
   children,

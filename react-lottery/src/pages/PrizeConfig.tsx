@@ -3,12 +3,12 @@ import { PRIZE_CONFIG, NO_PRIZE } from "common/model/Strings";
 import { loadPrizes, Prize, totalPrizes, hasAnyPrizes } from "common/model";
 import { FiMinusCircle, FiPlayCircle, FiPlusCircle } from "react-icons/fi";
 import Row from "../components/Row";
-import "./PrizeConfig.css";
+import "common/css/PrizeConfig.css";
 
 import * as util from "common/model/util";
 
 export default class PrizeConfig extends React.Component< any, { prizes: Prize[] } > {
-  constructor(props: object) {
+  constructor(props: any) {
     super(props);
     this.state = {
       prizes: loadPrizes(),

@@ -1,6 +1,6 @@
-const {aliasWebpack, aliasJest} = require('react-app-alias-ex')
+const { aliasWebpack, aliasJest } = require("react-app-alias-ex");
 
-const options = {}
+const options = {};
 
-module.exports = aliasWebpack(options)
-module.exports.jest = aliasJest(options)
+module.exports = aliasWebpack(options);
+module.exports.jest = aliasJest(options);

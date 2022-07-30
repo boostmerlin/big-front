@@ -19,7 +19,6 @@ export const take = <T>(array: Array<T>, n: number) => {
   return array;
 };
 
-
 const numberOfCandidates = 6;
 const numberOfCandidatesInAChunk = numberOfCandidates / 2;
 
@@ -61,7 +60,10 @@ export function handleCountChange(index: number, stateUpdate: onUpdateState) {
 export function handleRemove(index: number, stateUpdate: onUpdateState) {
   return () => {
     const prizes = loadPrizes();
-    if (window.confirm(`确定要删除奖品：${prizes[index].name}`)) {
+    if (
+      prizes[index].count === 0 ||
+      window.confirm(`确定要删除奖品：${prizes[index].name}`)
+    ) {
       const newState = removePrize(index);
       stateUpdate(newState);
     }
