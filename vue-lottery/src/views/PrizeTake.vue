@@ -1,5 +1,5 @@
 <script setup lang="ts">
-//会被自动注册?
+//会被自动注册
 import { BIconArrowLeftCircle } from "bootstrap-icons-vue";
 import { hasAnyPrizes, loadPrizes, Prize, takePrize } from "common/model";
 import { computed, defineComponent, h, ref, unref, watchEffect } from "vue";
