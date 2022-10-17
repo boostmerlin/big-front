@@ -23,7 +23,7 @@ class _DelaySlideDownState extends State<DelaySlideDown>
   );
   late final Animation<Offset> _offsetAnimation = Tween<Offset>(
     end: Offset.zero,
-    begin: const Offset(0.0, -600),
+    begin: const Offset(0.0, -700),
   ).animate(CurvedAnimation(
     parent: _controller,
     curve: Curves.easeIn,
