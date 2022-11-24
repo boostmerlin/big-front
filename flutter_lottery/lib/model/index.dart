@@ -33,9 +33,9 @@ class Prize {
 final kDefault = <Prize>[
   Prize(name: "文具一套", count: 10),
   Prize(name: "书籍一本", count: 10),
-  Prize(name: "免做语文作业一项", count: 3),
-  Prize(name: "免做数学作业一项", count: 3),
-  Prize(name: "免做英语作业一项", count: 3),
+  Prize(name: "玩游戏一小时", count: 3),
+  Prize(name: "刷抖音一小时", count: 3),
+  Prize(name: "写代码一小时", count: 3),
 ];
 
 final defaultPrizes = [...kDefault];

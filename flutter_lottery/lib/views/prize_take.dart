@@ -81,7 +81,7 @@ class _PrizeTakeState extends State<PrizeTake> {
   }
 
   void _onOpen(Prize prize) {
-    print('choose prize ${prize}');
+    print('choose prize $prize');
     setState(() {
       selected = prize;
     });
@@ -98,8 +98,8 @@ class _PrizeTakeState extends State<PrizeTake> {
             const Padding(padding: EdgeInsets.all(18), child: BackButton()),
             Center(
               child: SizedBox(
-                  width: 500,
-                  height: 400,
+                  width: 520,
+                  height: 420,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: candidates

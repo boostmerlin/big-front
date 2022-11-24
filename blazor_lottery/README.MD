@@ -2,12 +2,24 @@
 
 未完成  
 
-框架优秀、文档不够好
+### 优点
+* 框架优秀，c#优秀，支持server端渲染和WASM
+* blazor.server官方说性能不错（应该比rails好）
 
+### 缺点
+
+* 资料少，全靠官方文档
+* 兼容性不好，ToC的不太适合，ToB应该没有什么问题
+* 生态少，库少
+* hotreload不好用，很多改变要重启才生效
+* blazor.wasm 目前加载慢
+  
 ## ENV
 
 on mac:  
 `brew install dotnet`
+
+`ln  common/css/* blazor_lottery/wwwroot/css/lottery/`
 
 on win:  
 install your self
@@ -24,6 +36,8 @@ this app is create with:
 automatic open browser for you
 
 ## Mod
+
+use <https://ant-design-blazor.gitee.io/>
 
 1. add new razor component  
 

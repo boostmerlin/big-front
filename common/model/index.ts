@@ -13,9 +13,9 @@ interface PrizeAttr {
 const DEFAULT: Prize[] = [
   { name: "文具一套", count: 10 },
   { name: "书籍一本", count: 10 },
-  { name: "免做语文作业一项", count: 3 },
-  { name: "免做数学作业一项", count: 3 },
-  { name: "免做英语作业一项", count: 3 },
+  { name: "玩游戏一小时", count: 3 },
+  { name: "刷抖音一小时", count: 3 },
+  { name: "写代码一小时", count: 3 },
 ];
 
 let prizes = [...DEFAULT];

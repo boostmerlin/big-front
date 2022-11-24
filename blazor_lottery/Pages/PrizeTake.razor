@@ -1,0 +1,77 @@
+﻿@page "/take"
+
+<PageTitle>抽取</PageTitle>
+
+@using blazor_lottery.Data;
+
+@inject ILocalStorageService localStorage
+@inject PrizeService prizeService
+@inject ILogger<PrizeService> logger
+@inject NavigationManager navigationManager;
+
+<div>
+    <Back />
+    <div class="container" @onclick="onTakePrize">
+        @for (int i = 0; i < candidates?.Length; i++)
+        {
+            var c = candidates[i];
+            int ii = i;
+            <Row>
+                @for (int j = 0; j < c.Length; j++)
+                {
+                    int jj = j;
+                    <Animated active="@active" delay=@((ii * 3 + jj) * Util.ANI_TIME * 0.8f)>
+                        <RedPacket active="@active" round="@round" prize="@c[jj]" onOpen="@onOpen" />
+                    </Animated>
+                }
+            </Row>
+        }
+    </div>
+</div>
+
+@code {
+    private Prize[][]? candidates;
+
+    private Prize? selected;
+
+    private bool active => selected == null;
+
+    private int round = 1;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender) 
+        {
+           await initPrizes();
+        }
+    }
+
+    private async Task initPrizes() {
+        var prizes = await prizeService.loadPrizes(localStorage);
+        candidates = Util.generateCandidates(prizes);
+        StateHasChanged();
+    }
+
+    private async void onTakePrize()
+    {
+        if(selected == null) 
+        {
+            return;
+        }
+        await prizeService.takePrize(localStorage, selected);
+        selected = null;
+        round++;
+        if(!prizeService.hasAnyPrize()) 
+        {
+            navigationManager.NavigateTo("/configure");
+        }
+        logger.LogWarning($"next round: {round}");
+        await initPrizes();
+    }
+
+    private void onOpen(Prize prize)
+    {
+        logger.LogWarning($"handleOpen: {prize}");
+        selected = prize;
+    }
+}

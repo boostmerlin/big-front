@@ -89,6 +89,7 @@ class _RedPacketState extends State<RedPacket> with TickerProviderStateMixin {
     _shakeController.forward();
   }
 
+  // ignore: slash_for_doc_comments
   /**
       <div className={cx("redpacket", { shake: open })}>
       <div className="prize">
@@ -133,7 +134,7 @@ class _RedPacketState extends State<RedPacket> with TickerProviderStateMixin {
               child: Text(
             widget._prize.name!,
             style: const TextStyle(
-              fontSize: 12.0,
+              fontSize: 14.0,
               fontWeight: FontWeight.bold,
               fontFamily: 'serif',
               color: Color(0xffd8493b),
@@ -175,17 +176,17 @@ class _RedPacketState extends State<RedPacket> with TickerProviderStateMixin {
             ),
           ),
           Positioned(
-            top: kPacketWidth - 15,
+            top: kPacketWidth + 5,
             child: AnimatedBuilder(
               animation: lowerAnim,
               builder: (context, child) => Container(
                 //open button
                 alignment: Alignment.center,
                 constraints:
-                    const BoxConstraints.tightFor(width: 30, height: 30),
+                    const BoxConstraints.tightFor(width: 32, height: 32),
                 decoration: BoxDecoration(
                   color: Color.fromRGBO(253, 204, 3, fadeAnim.value),
-                  borderRadius: BorderRadius.circular(15),
+                  borderRadius: BorderRadius.circular(16),
                 ),
                 child: AnimatedBuilder(
                     animation: fadeAnim,
@@ -195,7 +196,7 @@ class _RedPacketState extends State<RedPacket> with TickerProviderStateMixin {
                         child: Text(
                           open,
                           style: TextStyle(
-                            fontSize: 15.0,
+                            fontSize: 16.0,
                             fontWeight: FontWeight.bold,
                             fontFamily: 'serif',
                             color:

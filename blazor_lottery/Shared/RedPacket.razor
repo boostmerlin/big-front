@@ -1,0 +1,58 @@
+﻿@using blazor_lottery.Data;
+
+@inject ILogger<RedPacket> logger
+
+<div class="@combineStyle("redpacket", "shake", open)">
+    <div class="prize">
+        <span>@prize?.name</span>
+    </div>
+    <div class="@combineStyle("redpacket-lower", "open", open)" />
+    <div class="@combineStyle("redpacket-upper", "open", open)">
+        <div class="@combineStyle("redpacket-button", "fade", open)" @onclick="handleOpen" @onclick:stopPropagation>
+            @Strings.OPEN
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public bool active { get; set; }
+
+    [Parameter]
+    public int round { get; set; }
+
+    [Parameter]
+    public Prize? prize { get; set; }
+
+    [Parameter]
+    public EventCallback<Prize> onOpen { get; set; }
+
+    private int lastRound = 0;
+
+    private void handleOpen(MouseEventArgs e)
+    {
+        if (active)
+        {
+            onOpen.InvokeAsync(prize);
+            open = true;
+            @* StateHasChanged(); *@
+            return;
+        }
+        logger.LogWarning("not active");
+    }
+
+    override protected void OnParametersSet() {
+        if (lastRound != round) 
+        {
+            open = false;
+            lastRound = round;
+        }
+    }
+
+    private bool open;
+
+    private string combineStyle(string name, string optional, bool open)
+    {
+        return $"{name} {(open ? optional : "")}";
+    }
+}

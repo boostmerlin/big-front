@@ -1,6 +1,6 @@
 # flutter_lottery
 
-A new Flutter project.
+A Flutter lottery project.
 
 ## Getting Started
 
@@ -14,6 +14,19 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+## env
+
+Doctor summary:
+[✓] Flutter (Channel stable, 3.3.4, on macOS 12.5 21G72 darwin-x64, locale zh-Hans-CN)
+[✓] Android toolchain - develop for Android devices (Android SDK version 32.0.0)
+[✓] Xcode - develop for iOS and macOS (Xcode 14.1)
+[✓] Chrome - develop for the web
+[✓] Android Studio (version 4.1)
+[✓] IntelliJ IDEA Community Edition (version 2021.2.4)
+[✓] VS Code (version 1.73.1)
+[✓] Connected device (2 available)
+[✓] HTTP Host Availability
 
 ## Run this project
 

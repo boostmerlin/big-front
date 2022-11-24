@@ -1,0 +1,22 @@
+﻿
+@using blazor_lottery.Data;
+
+<div style="@animationStyle">
+    @ChildContent
+</div>
+
+@code {
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+
+    [Parameter]
+    public float delay {get;set;}
+
+    [Parameter]
+    public bool active {get;set;}
+
+    private string animationStyle {
+        get {
+            return active ? $"animation: {Util.ANI_TIME*2}s backInDown ease backwards;animation-delay:{delay}s" : "";
+        }
+    }
+}

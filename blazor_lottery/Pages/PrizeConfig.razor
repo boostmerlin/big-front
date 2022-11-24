@@ -1,0 +1,121 @@
+﻿@page "/"
+@page "/configure"
+
+<PageTitle>设置</PageTitle>
+
+@using blazor_lottery.Data;
+
+@inject ILocalStorageService localStorage
+@inject PrizeService prizeService
+@inject ILogger<PrizeService> logger
+@inject NavigationManager navigationManager;
+
+<div class="LotteryView">
+    <h1 class="title">@Strings.PRIZE_CONFIG</h1>
+    <table aria-hidden="true">
+        <thead>
+        <tr>
+            <th scope="col">奖品</th>
+            <th scope="cols">数量</th>
+        </tr>
+        </thead>
+        <tbody>
+        @for(int i = 0; i < prizes?.Length; i++)
+        {
+            var (name, count) = prizes[i];
+            int index = i;
+            <tr>
+                <td>
+                <input
+                    name="name"
+                    placeholder="奖品名称"
+                    value="@name"
+                    @onchange="@(e => HandleNameChange(index, e))"
+                />
+                </td>
+                <td>
+                <input
+                    name="count"
+                    type="number"
+                    max="{99}"
+                    min="{0}"
+                    value="@count"
+                    @onchange="@(e => HandleCountChange(index, e))"
+                />
+                </td>
+                <td>
+                <div
+                    class="button"
+                    @onclick="@(()=>HandleRemovePrize(index))"
+                >
+                    <Icon Type="minus-circle" Theme="outline"/>
+                </div>
+                </td>
+            </tr>
+        }
+        </tbody>
+        <tfoot>
+        <tr>
+            <th scope="row">共计：</th>
+            <td>@prizeService.totalPrizes()</td>
+        </tr>
+        </tfoot>
+    </table>
+    <MyRow>
+        <div class="button" @onclick="HandleAddPrize">
+            <Icon Type="plus-circle" Theme="outline" Style="color:coral"/>
+        </div>
+        <div class="button" @onclick="HandleStart">
+            <Icon Type="play-circle" Theme="outline" Style="color:green"/>
+        </div>
+    </MyRow>
+</div>
+
+@code {
+    private Prize[]? prizes;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender && prizes == null) 
+        {
+            //js op 得在OnAfterRenderAsync
+            prizes = await prizeService.loadPrizes(localStorage);
+            StateHasChanged();
+        }
+    }
+
+    private async void HandleNameChange(int index, ChangeEventArgs e)
+    {
+        var name = e?.Value?.ToString();
+        prizes = await prizeService.updatePrize(localStorage, index, new Prize {name = name});
+        StateHasChanged();
+    }
+
+    private async void HandleCountChange(int index, ChangeEventArgs e)
+    {
+        var s = e?.Value?.ToString();
+        if (s == null) {
+            return;
+        }
+        var n = int.Parse(s);
+        prizes = await prizeService.updatePrize(localStorage, index, new Prize {count = n});
+        StateHasChanged();
+    }
+
+    private async void HandleRemovePrize(int index)
+    {
+        prizes = await prizeService.removePrize(localStorage, index);
+        StateHasChanged();
+    }
+
+    private async void HandleAddPrize()
+    {
+        prizes = await prizeService.addPrize(localStorage);
+        StateHasChanged();
+    }
+    private void HandleStart()
+    {
+        logger.LogWarning("start!");
+        navigationManager.NavigateTo("/take");
+    }
+}
