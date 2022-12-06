@@ -14,6 +14,10 @@
 * flutter
 * blazor
 
+TODO: 
+* solid.js
+* svelte.js
+
 ## 使用说明
 
 cd xx-lottery, 参考不同readme
