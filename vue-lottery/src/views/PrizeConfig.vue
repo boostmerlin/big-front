@@ -29,8 +29,8 @@ function handleStart() {
 </script>
 
 <template>
-  <div className="LotteryView">
-    <h1 className="title">{{ PRIZE_CONFIG }}</h1>
+  <div class="LotteryView">
+    <h1 class="title">{{ PRIZE_CONFIG }}</h1>
     <table aria-hidden="true">
       <thead>
         <tr>
@@ -60,10 +60,10 @@ function handleStart() {
           </td>
           <td>
             <div
-              className="button"
+              class="button"
               @click="util.handleRemove(i, updateState)()"
             >
-              <BIconDashCircle />
+              <BIconDashCircle color="red"/>
             </div>
           </td>
         </tr>
@@ -76,10 +76,10 @@ function handleStart() {
       </tfoot>
     </table>
     <Row>
-      <div className="button" @click="util.handleAdd(updateState)()">
+      <div class="button" @click="util.handleAdd(updateState)()">
         <BIconPlusCircle color="#c3a26e" />
       </div>
-      <div className="button" @click="handleStart">
+      <div class="button" @click="handleStart">
         <BIconPlayCircle color="green" />
       </div>
     </Row>

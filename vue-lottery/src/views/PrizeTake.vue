@@ -62,6 +62,7 @@ const onOpen = (prize: Prize) => {
 <template>
   <div>
     <Back />
+    <!--className do works!!-->
     <div className="container" @click="onTakePrize">
       <Row v-for="(c, i) of candidates" :key="i">
         <Animate

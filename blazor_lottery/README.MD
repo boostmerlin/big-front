@@ -33,6 +33,7 @@ this app is create with:
 ## Run
 
 `dotnet watch`
+
 automatic open browser for you
 
 ## Mod

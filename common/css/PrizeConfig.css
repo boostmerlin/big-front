@@ -2,8 +2,14 @@
   width: 100vw;
   display: flex;
   flex-flow: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
+}
+
+.LotteryView h1.title {
+  font-size: 6vh;
+  text-align: center;
+  color: #f45e4f;
 }
 
 .LotteryView input {
@@ -29,12 +35,6 @@
   border-radius: 8px;
 }
 
-.LotteryView h1.title {
-  font-size: 6vh;
-  text-align: center;
-  color: #f45e4f;
-}
-
 .LotteryView input[type="number"] {
   text-align: right;
   width: 9vh;
@@ -45,13 +45,11 @@
 }
 
 .LotteryView .button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   padding: 8px;
   margin: 8px;
   font-size: 5vh;
-  border-radius: 50%;
+  display: flex;
+  align-items: center;
 }
 
 .LotteryView table {

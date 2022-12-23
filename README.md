@@ -13,6 +13,11 @@
 * vue
 * flutter
 * blazor
+* svelte
+
+TODO: 
+* solid.js
+
 
 TODO: 
 * solid.js

@@ -46,13 +46,11 @@
 }
 
 .LotteryView .button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   padding: 8px;
   margin: 8px;
   font-size: 5vh;
-  border-radius: 50%;
+  display: flex;
+  align-items: center;
 }
 
 .LotteryView table {

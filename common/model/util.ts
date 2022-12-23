@@ -53,6 +53,7 @@ export function handleCountChange(index: number, stateUpdate: onUpdateState) {
   return (event: any) => {
     const value = event.target.value;
     const newState = updatePrize(index, { count: parseInt(value) });
+    console.log("account change: " + value);
     stateUpdate(newState);
   };
 }
