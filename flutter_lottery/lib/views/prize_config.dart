@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_lottery/components/alert.dart';
 
 import '../model/index.dart';
+import '../model/strings.dart';
 
 const kTitleSize = TextStyle(fontSize: 50, color: Color(0xFFFE5E4F));
 const kHeaderStyle = TextStyle(
@@ -40,7 +41,7 @@ class _PrizeConfigState extends State<PrizeConfig> {
                 controller: TextEditingController(text: prize.name),
                 style: kItemStyle,
                 decoration: const InputDecoration(
-                  hintText: "输入奖品",
+                  hintText: "配置名称",
                   border: InputBorder.none,
                   hintStyle: TextStyle(
                       color: Color(0xffc3a26e), fontStyle: FontStyle.italic),
@@ -69,6 +70,8 @@ class _PrizeConfigState extends State<PrizeConfig> {
                 onChanged: (text) {
                   prize.count = int.tryParse(text) ?? 0;
                   savePrizes(_prizes);
+                  setState(() {
+                  });
                 }),
           ),
           Container(
@@ -114,7 +117,7 @@ class _PrizeConfigState extends State<PrizeConfig> {
         children: [
           const Padding(
             padding: EdgeInsets.all(10.0),
-            child: Text('奖品配置', style: kTitleSize),
+            child: Text(prizeConfig, style: kTitleSize),
           ),
           SizedBox(
             width: 480,
@@ -130,13 +133,13 @@ class _PrizeConfigState extends State<PrizeConfig> {
                   children: [
                     Center(
                       child: Text(
-                        '奖品',
+                        prizeName,
                         style: kHeaderStyle,
                       ),
                     ),
                     Center(
                       child: Text(
-                        '数量',
+                        prizeCount,
                         style: kHeaderStyle,
                       ),
                     ),
@@ -144,6 +147,19 @@ class _PrizeConfigState extends State<PrizeConfig> {
                   ],
                 ),
                 ..._buildPrizeRows(),
+                TableRow(
+                  children: [
+                    const Align(
+                      alignment: Alignment.centerRight,
+                      child: Text('总计：', style: kHeaderStyle,),
+                    ),
+                    Align(
+                      alignment: Alignment.bottomLeft,
+                      child: Text(totalPrizes().toString(), style: kHeaderStyle,),
+                    ),
+                    const Text(''),
+                  ],
+                )
               ],
             ),
           ),

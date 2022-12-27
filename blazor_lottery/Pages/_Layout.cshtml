@@ -20,6 +20,8 @@
     <link href="css/lottery/Row.css" rel="stylesheet" />
     <link rel="stylesheet" href="css/animate.min.css" />
     <component type="typeof(HeadOutlet)" render-mode="ServerPrerendered" />
+    <script src="lib/howler.min.js"></script>
+    <script src="lib/Sound.js"></script>
 </head>
 <body>
     @RenderBody()
@@ -36,5 +38,13 @@
     </div>
 
     <script src="_framework/blazor.server.js"></script>
+    <script>
+        new Howl({
+            autoplay: true,
+            loop: true,
+            src: ['sound/bg.mp3'],
+            volume: 0.7
+        })
+    </script>
 </body>
 </html>

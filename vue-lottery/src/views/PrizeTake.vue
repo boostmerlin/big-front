@@ -15,6 +15,7 @@ const Back = defineComponent({
   // },
   methods: {
     onClick() {
+      window.playAppear();
       this.$router.back();
     },
   },
@@ -45,7 +46,11 @@ watchEffect(() => {
 
 const onTakePrize = () => {
   const p = unref(selected);
-  if (!p) return;
+  if (!p) {
+    window.playError();
+    return;
+  }
+  window.playAppear();
   takePrize(p);
   selected.value = null;
   round.value++;
@@ -56,6 +61,7 @@ const active = computed(() => unref(selected) === null);
 
 const onOpen = (prize: Prize) => {
   selected.value = prize;
+  window.playHooray();
 };
 </script>
 

@@ -1,5 +1,6 @@
 import { addPrize, loadPrizes, Prize, removePrize, updatePrize } from "./index";
 import { shuffle, flatten, chunk } from "lodash";
+import '../js/Sound'
 
 export const take = <T>(array: Array<T>, n: number) => {
   const length = array.length;
@@ -65,11 +66,14 @@ export function handleRemove(index: number, stateUpdate: onUpdateState) {
       prizes[index].count === 0 ||
       window.confirm(`确定要删除奖品：${prizes[index].name}`)
     ) {
+      window.playError();
       const newState = removePrize(index);
       stateUpdate(newState);
     }
   };
 }
 
-export const handleAdd = (stateUpdate: onUpdateState) => () =>
+export const handleAdd = (stateUpdate: onUpdateState) => () => {
+  window.playAppear();
   stateUpdate(addPrize());
+}

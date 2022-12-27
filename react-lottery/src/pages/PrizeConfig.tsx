@@ -1,5 +1,5 @@
 import React from "react";
-import { PRIZE_CONFIG, NO_PRIZE } from "common/model/Strings";
+import { PRIZE_CONFIG, NO_PRIZE, PRIZE_NAME, PRIZE_COUNT } from "common/model/Strings";
 import { loadPrizes, Prize, totalPrizes, hasAnyPrizes } from "common/model";
 import { FiMinusCircle, FiPlayCircle, FiPlusCircle } from "react-icons/fi";
 import Row from "../components/Row";
@@ -21,9 +21,10 @@ export default class PrizeConfig extends React.Component< any, { prizes: Prize[]
 
   handleStart = () => {
     if (hasAnyPrizes()) {
+      window.playAppear();
       window.location.href = "/take";
-      // useNavigate()('/take')
     } else {
+      window.playError();
       window.alert(NO_PRIZE);
     }
   };
@@ -35,8 +36,8 @@ export default class PrizeConfig extends React.Component< any, { prizes: Prize[]
         <table>
           <thead>
             <tr>
-              <th>奖品</th>
-              <th>数量</th>
+              <th>{PRIZE_NAME}</th>
+              <th>{PRIZE_COUNT}</th>
               <th></th>
             </tr>
           </thead>
@@ -46,7 +47,7 @@ export default class PrizeConfig extends React.Component< any, { prizes: Prize[]
                 <td>
                   <input
                     name="name"
-                    placeholder="奖品名称"
+                    placeholder="配置名称"
                     value={name}
                     onChange={util.handleNameChange(index, this.updateState)}
                   />
@@ -87,6 +88,9 @@ export default class PrizeConfig extends React.Component< any, { prizes: Prize[]
             <FiPlayCircle size="5vh" color="green" />
           </div>
         </Row>
+        <footer>
+          Powered by ml@React
+        </footer>
       </div>
     );
   }

@@ -10,6 +10,7 @@
   "author": "ml",
   "license": "ISC",
   "dependencies": {
+    "howler": "^2.2.3",
     "lodash": "^4.17.21"
   },
   "devDependencies": {

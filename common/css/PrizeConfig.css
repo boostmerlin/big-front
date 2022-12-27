@@ -82,3 +82,13 @@
 .LotteryView tfoot td {
   text-align: center;
 }
+
+footer {
+  position: fixed;
+  font-size: 1vh;
+  color: darksalmon;
+  bottom: 0.3vh;
+  left: 0;
+  right: 0;
+  text-align: center;
+}

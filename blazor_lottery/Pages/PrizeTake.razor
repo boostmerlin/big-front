@@ -4,10 +4,11 @@
 
 @using blazor_lottery.Data;
 
-@inject ILocalStorageService localStorage
-@inject PrizeService prizeService
-@inject ILogger<PrizeService> logger
+@inject ILocalStorageService localStorage;
+@inject PrizeService prizeService;
+@inject ILogger<PrizeService> logger;
 @inject NavigationManager navigationManager;
+@inject IJSRuntime jsRuntime;
 
 <div>
     <Back />
@@ -56,8 +57,10 @@
     {
         if(selected == null) 
         {
+            await jsRuntime.InvokeVoidAsync("playError");
             return;
         }
+        await jsRuntime.InvokeVoidAsync("playAppear");
         await prizeService.takePrize(localStorage, selected);
         selected = null;
         round++;

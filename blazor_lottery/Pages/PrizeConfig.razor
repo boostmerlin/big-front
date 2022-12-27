@@ -5,18 +5,19 @@
 
 @using blazor_lottery.Data;
 
-@inject ILocalStorageService localStorage
-@inject PrizeService prizeService
-@inject ILogger<PrizeService> logger
+@inject ILocalStorageService localStorage;
+@inject PrizeService prizeService;
+@inject ILogger<PrizeService> logger;
 @inject NavigationManager navigationManager;
+@inject IJSRuntime jsRuntime;
 
 <div class="LotteryView">
     <h1 class="title">@Strings.PRIZE_CONFIG</h1>
     <table aria-hidden="true">
         <thead>
         <tr>
-            <th scope="col">奖品</th>
-            <th scope="cols">数量</th>
+            <th scope="col">@Strings.PRIZE_NAME</th>
+            <th scope="cols">@Strings.PRIZE_COUNT</th>
         </tr>
         </thead>
         <tbody>
@@ -28,7 +29,7 @@
                 <td>
                 <input
                     name="name"
-                    placeholder="奖品名称"
+                    placeholder="配置名称"
                     value="@name"
                     @onchange="@(e => HandleNameChange(index, e))"
                 />
@@ -69,10 +70,31 @@
             <Icon Type="play-circle" Theme="outline" Style="color:green"/>
         </div>
     </MyRow>
+    <Modal Title="提示"
+       Visible="@(_index >= 0)"
+       OnOk="@HandleOk"
+       OnCancel="@(()=>_index = -1)">
+    <p>@_content</p>
+    </Modal>
 </div>
+<footer>
+    Powered By ml@Blazor
+</footer>
 
 @code {
     private Prize[]? prizes;
+    int _index = -1;
+
+    string _content = "";
+
+    private async void HandleOk(MouseEventArgs e)
+    {
+        await jsRuntime.InvokeVoidAsync("playAppear");
+        logger.LogError("do remove : " + _index);
+        prizes = await prizeService.removePrize(localStorage, _index);
+        _index = -1;
+        StateHasChanged();
+    }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -104,18 +126,40 @@
 
     private async void HandleRemovePrize(int index)
     {
-        prizes = await prizeService.removePrize(localStorage, index);
-        StateHasChanged();
+        logger.LogWarning("HandleRemovePrize: " + index + " " + prizes?[index]);
+        if(prizes?[index].count <= 0) {
+            await jsRuntime.InvokeVoidAsync("playError");
+            prizes = await prizeService.removePrize(localStorage, index);
+            StateHasChanged();
+        }
+        else {
+            await jsRuntime.InvokeVoidAsync("playAppear");
+            openDiag("是否删除该配置项: " + prizes?[index].name, index);
+            StateHasChanged();
+        }
     }
 
     private async void HandleAddPrize()
     {
+        await jsRuntime.InvokeVoidAsync("playAppear");
         prizes = await prizeService.addPrize(localStorage);
         StateHasChanged();
     }
     private void HandleStart()
     {
         logger.LogWarning("start!");
-        navigationManager.NavigateTo("/take");
+        if (prizeService.hasAnyPrize()) {
+            jsRuntime.InvokeVoidAsync("playAppear");
+            navigationManager.NavigateTo("/take");
+        } else {
+            jsRuntime.InvokeVoidAsync("playError");
+            openDiag(Strings.NO_PRIZE);
+        }
+    }
+
+    private void openDiag(string content, int index = 0) 
+    {
+        _content = content;
+        _index = index;
     }
 }

@@ -103,7 +103,7 @@ removePrize(int index) {
   return prizes;
 }
 
-hasAnyPrizes() {
+bool hasAnyPrizes() {
   final prizes = loadPrizes();
   if (prizes.isEmpty) {
     return false;
@@ -111,7 +111,7 @@ hasAnyPrizes() {
   return prizes.any((p) => p.count! > 0);
 }
 
-totalPrizes() {
+int totalPrizes() {
   final prizes = loadPrizes();
   if (prizes.isEmpty) {
     return 0;

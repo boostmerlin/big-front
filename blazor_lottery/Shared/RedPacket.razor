@@ -1,6 +1,7 @@
 ﻿@using blazor_lottery.Data;
 
-@inject ILogger<RedPacket> logger
+@inject ILogger<RedPacket> logger;
+@inject IJSRuntime jsRuntime;
 
 <div class="@combineStyle("redpacket", "shake", open)">
     <div class="prize">
@@ -35,6 +36,7 @@
         {
             onOpen.InvokeAsync(prize);
             open = true;
+            jsRuntime.InvokeVoidAsync("playHooray");
             @* StateHasChanged(); *@
             return;
         }

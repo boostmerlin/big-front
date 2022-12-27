@@ -6,6 +6,8 @@ import {
 } from "react-router-dom";
 import PrizeConfig from "./pages/PrizeConfig";
 import PrizeTake from "./pages/PrizeTake";
+import "common/js/Sound"
+window.playBg();
 
 function App() {
   return (

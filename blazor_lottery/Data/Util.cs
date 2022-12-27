@@ -18,13 +18,13 @@ public static class Util
         {
             return array.SkipLast(len - n).ToArray<T>();
         }
-
         //fill with duplicated element to reach n
-        IEnumerable<T> a = array;
+        var a = new List<T>(array);
         for (int i = len; i < n; i++)
         {
             int dup = Random.Shared.Next(len);
-            a = array.Append(array[dup]);
+            a.Add(array[dup]);
+            Console.WriteLine(a.Count + " " + dup + " " + array[dup]);
         }
         return a.ToArray();
     }

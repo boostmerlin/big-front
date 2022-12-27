@@ -12,6 +12,7 @@ let open = false;
 const handleOpen = () => {
   console.log("open prize", prize.name);
   open = true;
+  window.playAppear();
   onOpen(prize);
 };
 

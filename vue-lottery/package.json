@@ -8,11 +8,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "animate.css": "^4.1.1",
     "bootstrap-icons-vue": "^1.8.1",
     "common": "file:../common",
     "vue": "^3.2.37",
-    "vue-router": "^4.1.2",
-    "animate.css": "^4.1.1"
+    "vue-router": "^4.1.2"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.3.3",

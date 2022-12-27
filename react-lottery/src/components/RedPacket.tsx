@@ -12,7 +12,8 @@ interface IProps {
 
 export default function RedPacket(props: IProps): React.ReactElement {
   const handleOpen = () => {
-    setOpen(true);
+    setOpen(true);  
+    window.playAppear();
     props.onOpen(props.prize);
   };
   const [open, setOpen] = useState(true);

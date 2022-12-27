@@ -34,37 +34,3 @@ List<List<Prize>> generateCandidates(List<Prize> prizes) {
   final takes = take(candidates, numberOfCandidates);
   return takes.chunked(numberOfCandidatesInAChunk).toList();
 }
-
-//注意，这里不需要绑定this对象
-// handleNameChange(index: number, stateUpdate: onUpdateState) {
-//   return (event: any) => {
-//     const name = event.target.value;
-//     console.log(index);
-//     const newState = updatePrize(index, { name });
-//     stateUpdate(newState);
-//   };
-// }
-
-// export function handleCountChange(index: number, stateUpdate: onUpdateState) {
-//   return (event: any) => {
-//     const value = event.target.value;
-//     const newState = updatePrize(index, { count: parseInt(value) });
-//     stateUpdate(newState);
-//   };
-// }
-
-// export function handleRemove(index: number, stateUpdate: onUpdateState) {
-//   return () => {
-//     const prizes = loadPrizes();
-//     if (
-//       prizes[index].count === 0 ||
-//       window.confirm(`确定要删除奖品：${prizes[index].name}`)
-//     ) {
-//       const newState = removePrize(index);
-//       stateUpdate(newState);
-//     }
-//   };
-// }
-
-// export const handleAdd = (stateUpdate: onUpdateState) => () =>
-//   stateUpdate(addPrize());

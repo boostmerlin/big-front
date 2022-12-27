@@ -17,6 +17,7 @@ const open = ref(false);
 
 const handleOpen = () => {
   console.log("open prize", props.prize.name);
+  window.playAppear();
   open.value = true;
   props.onOpen(props.prize);
 };

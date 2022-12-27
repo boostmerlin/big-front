@@ -1,5 +1,6 @@
 ﻿
 @inject NavigationManager navigationManager;
+@inject IJSRuntime jsRuntime;
 
 <div class="back" @onclick="OnClick">
     <Icon Type="left-circle" Theme="outline" style="color: #c3a26e; font-size: 4vh"/>
@@ -8,6 +9,7 @@
 @*想定义一个内部组件，但没找到方法*@
 @code {
     private void OnClick() {
+        jsRuntime.InvokeVoidAsync("playAppear");
         navigationManager.NavigateTo("/configure");
     }
 }

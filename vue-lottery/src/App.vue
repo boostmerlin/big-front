@@ -15,3 +15,8 @@ body {
     <router-view></router-view>
   </div>
 </template>
+
+<script lang="ts">
+  import "common/js/Sound"
+  window.playBg();
+</script>

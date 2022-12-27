@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { PRIZE_CONFIG, NO_PRIZE } from "common/model/Strings";
+import { PRIZE_CONFIG, NO_PRIZE, PRIZE_NAME, PRIZE_COUNT } from "common/model/Strings";
 import { loadPrizes, totalPrizes, hasAnyPrizes, Prize } from "common/model";
 import {
   BIconDashCircle,
@@ -21,8 +21,10 @@ const updateState = (newPrizes: Prize[]) => {
 
 function handleStart() {
   if (hasAnyPrizes()) {
+    window.playAppear();
     router.push("/take");
   } else {
+    window.playError();
     window.alert(NO_PRIZE);
   }
 }
@@ -34,8 +36,8 @@ function handleStart() {
     <table aria-hidden="true">
       <thead>
         <tr>
-          <th scope="col">奖品</th>
-          <th scope="cols">数量</th>
+          <th scope="col">{{ PRIZE_NAME }}</th>
+          <th scope="cols">{{ PRIZE_COUNT }}</th>
         </tr>
       </thead>
       <tbody>
@@ -43,7 +45,7 @@ function handleStart() {
           <td>
             <input
               name="name"
-              placeholder="奖品名称"
+              placeholder="配置名称"
               :value="name"
               v-on:change="util.handleNameChange(i, updateState)($event)"
             />
@@ -84,6 +86,9 @@ function handleStart() {
       </div>
     </Row>
   </div>
+  <footer>
+    Powered by ml@Vue
+  </footer>
 </template>
 
 <style scoped>

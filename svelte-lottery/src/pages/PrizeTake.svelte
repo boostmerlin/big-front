@@ -16,6 +16,7 @@ let round = 1;
 let candidates: Prize[][] = [];
 
 function backToConfig() {
+  window.playAppear();
   navigateTo('/config');
 }
 
@@ -28,7 +29,11 @@ $: {
 
 const onTakePrize = () => {
   const p = selected;
-  if (!p) return;
+  if (!p) {
+    window.playError();
+    return;
+  }
+  window.playAppear();
   takePrize(p);
   selected = null;
   round++;
@@ -39,6 +44,7 @@ const onTakePrize = () => {
 $: active = selected === null;
 
 const onOpen = (prize: Prize) => {
+  window.playHooray();
   selected = prize;
 };
 </script>

@@ -12,6 +12,7 @@ import { generateCandidates } from "common/model/util";
 function Back() {
   const navi = useNavigate();
   const handleBack = async () => {
+    window.playAppear();
     navi("/configure");
   };
   return (
@@ -29,10 +30,15 @@ export default function PrizeTake() {
   const [round, setRound] = useState(0);
 
   const onOpen = (prize: Prize) => {
+    window.playHooray();
     setSelected(prize);
   };
   const onTakePrize = () => {
-    if (!selected) return;
+    if (!selected) {
+      window.playError();
+      return;
+    }
+    window.playAppear();
     console.log(`You got ${selected.name}`);
     setPrizes(takePrize(selected));
     setSelected(null);
