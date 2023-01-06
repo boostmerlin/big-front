@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_lottery/audio/sound.dart';
 import 'package:flutter_lottery/views/prize_config.dart';
 import 'package:flutter_lottery/views/prize_take.dart';
 
@@ -6,8 +7,31 @@ void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+    initAudio();
+  }
+
+  void initAudio() async {
+    await Sound.init();
+    //bg play got a error on web(Must interactive first.)
+    await Sound.play('bg.mp3', loop: true);
+  }
+
+   @override
+  void dispose() {
+    Sound.dispose();
+    super.dispose();
+  }
 
   // This widget is the root of your application.
   @override
@@ -23,41 +47,4 @@ class MyApp extends StatelessWidget {
       },
     );
   }
-
-  // // many widget like textfield need Material.
-  // @override
-  // Widget build(BuildContext context) {
-  //   return WidgetsApp(
-  //       title: 'Flutter Lottery',
-  //       color: const Color(0xFFFF9000),
-  //       initialRoute: '/config',
-  //       routes: {
-  //         '/': (BuildContext context) => const PrizeConfig(),
-  //         '/config': (BuildContext context) => const PrizeConfig(),
-  //         '/take': (BuildContext context) => const PrizeTake(),
-  //       },
-  //       pageRouteBuilder: <Widget>(settings, builder) {
-  //         return PageRouteBuilder(
-  //           settings: settings,
-  //           pageBuilder: (context, animation, secondaryAnimation) {
-  //             final w = builder(context);
-  //             return Localizations(
-  //               locale: const Locale('en', 'zh'),
-  //               delegates: const <LocalizationsDelegate<dynamic>>[
-  //                 DefaultWidgetsLocalizations.delegate,
-  //                 DefaultMaterialLocalizations.delegate,
-  //               ],
-  //               child: MediaQuery(
-  //                 data: const MediaQueryData(),
-  //                 child: Directionality(
-  //                   textDirection: TextDirection.ltr,
-  //                   child: Material(
-  //                     child: w,
-  //                   ),
-  //                 ),
-  //               ),
-  //             );
-  //           },
-  //         );
-  //       });
 }

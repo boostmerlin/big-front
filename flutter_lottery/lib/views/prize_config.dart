@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_lottery/audio/sound.dart';
 import 'package:flutter_lottery/components/alert.dart';
 
 import '../model/index.dart';
@@ -88,10 +89,12 @@ class _PrizeConfigState extends State<PrizeConfig> {
                 onPressed: () async {
                   bool remove = true;
                   if (prize.count! > 0) {
+                    Sound.play('appear.mp3');
                     var ok = await alertDialog(context);
                     remove = ok == 'ok';
                   }
                   if (remove) {
+                    Sound.play('error.mp3');
                     setState(() {
                       _prizes.remove(prize);
                       savePrizes(_prizes);
@@ -100,7 +103,7 @@ class _PrizeConfigState extends State<PrizeConfig> {
                 },
                 icon: const Icon(
                   CupertinoIcons.delete_solid,
-                  color: Color(0xffa3a26e),
+                  color: Color.fromARGB(255, 206, 104, 104),
                 )),
           )
         ],
@@ -169,6 +172,7 @@ class _PrizeConfigState extends State<PrizeConfig> {
               IconButton(
                   color: Colors.transparent,
                   onPressed: () {
+                    Sound.play('appear.mp3');
                     setState(() {
                       _prizes = addPrize();
                     });
@@ -182,6 +186,7 @@ class _PrizeConfigState extends State<PrizeConfig> {
               IconButton(
                   color: Colors.transparent,
                   onPressed: () {
+                    Sound.play('appear.mp3');
                     Navigator.of(context).pushNamed('/take');
                   },
                   icon: const Icon(CupertinoIcons.play_circle,

@@ -4,6 +4,8 @@ import 'package:flutter_lottery/components/red_packet.dart';
 import 'package:flutter_lottery/model/index.dart';
 import 'package:flutter_lottery/model/utils.dart';
 
+import '../audio/sound.dart';
+
 class BackButton extends StatefulWidget {
   const BackButton({Key? key}) : super(key: key);
 
@@ -36,7 +38,10 @@ class _BackButtonState extends State<BackButton> {
                 alignment: Alignment.center,
                 icon: const Icon(
                     color: Colors.lightBlue, Icons.arrow_circle_left),
-                onPressed: () => Navigator.pushNamed(context, '/config'),
+                onPressed: () {
+                  Sound.play('appear.mp3');
+                  Navigator.pushNamed(context, '/config');
+                },
               ),
             );
           }),
@@ -70,8 +75,10 @@ class _PrizeTakeState extends State<PrizeTake> {
   void _onTakePrize() {
     if (selected == null) {
       print("error state, no prize selected");
+      Sound.play('error.mp3');
       return;
     }
+    Sound.play('appear.mp3');
     takePrize(selected!);
     round++;
     setState(() {
@@ -82,6 +89,7 @@ class _PrizeTakeState extends State<PrizeTake> {
 
   void _onOpen(Prize prize) {
     print('choose prize $prize');
+    Sound.play('hooray.mp3');
     setState(() {
       selected = prize;
     });
@@ -90,7 +98,7 @@ class _PrizeTakeState extends State<PrizeTake> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: selected != null ? _onTakePrize : null,
+      onTap: _onTakePrize,
       child: Container(
         color: const Color(0xffe7d8d8),
         child: Stack(

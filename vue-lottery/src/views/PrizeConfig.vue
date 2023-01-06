@@ -54,8 +54,8 @@ function handleStart() {
             <input
               name="count"
               type="number"
-              max="{99}"
-              min="{0}"
+              max="{{99}}"
+              min="{{0}}"
               :value="count"
               @change="util.handleCountChange(i, updateState)($event)"
             />

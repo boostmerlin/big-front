@@ -31,3 +31,8 @@ Doctor summary:
 ## Run this project
 
 flutter run
+
+## 感受
+
+* flutter run 在web上很慢，开发体验很差
+* ui组件不如js生态

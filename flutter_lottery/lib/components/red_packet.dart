@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_lottery/audio/sound.dart';
 import 'package:flutter_lottery/model/index.dart';
 import 'package:flutter_lottery/model/strings.dart';
 import 'package:shake_animation_widget/shake_animation_widget.dart';
@@ -86,6 +87,7 @@ class _RedPacketState extends State<RedPacket> with TickerProviderStateMixin {
 
   void _handleOpen() {
     //run the animation
+    Sound.play('appear.mp3');
     _shakeController.forward();
   }
 
